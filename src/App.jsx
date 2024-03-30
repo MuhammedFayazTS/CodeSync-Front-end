@@ -1,11 +1,16 @@
+import EditorLayout from 'Pages/Editor/EditorLayout'
+import Home from 'Pages/Home/Home.jsx'
+import { Route, Routes } from 'react-router-dom'
 
-import './App.css'
 
 function App() {
 
   return (
     <>
-      <h1 className='text-8xl'>Hellow</h1>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/code-editor/:id' element={<EditorLayout />} />
+      </Routes>
     </>
   )
 }
