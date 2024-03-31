@@ -10,3 +10,7 @@
 .purple-gradient{
     background: linear-gradient(220.55deg, #DEB5FF 0%, #6F00B3 100%);
 }
+
+.gradient-text{
+    @apply bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-transparent bg-clip-text
+}
