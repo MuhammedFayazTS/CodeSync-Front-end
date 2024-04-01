@@ -28,10 +28,6 @@ export function SignUp() {
     const signUpWithEmailPass = async (e) => {
         e.preventDefault();
         try {
-            const credentials = {
-                withCredentials: true
-            }
-
             if (!userDetails.email || !userDetails.password || !userDetails.username ||
                 userDetails.username === "" || userDetails.email === "" || userDetails.password === "") {
                 return alert("Fill all the fields")
