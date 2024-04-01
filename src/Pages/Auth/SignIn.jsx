@@ -10,21 +10,22 @@ import {
 import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
 import { Button } from "components/ui/button"
-import { Link, useNavigate,  } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { ServerVariables } from "utils/server-variables"
 
 export function SignIn() {
-    const navigate = useNavigate()
 
-    const signInWithGoogle = () =>{
-        window.open(`${import.meta.env.VITE_BACKEND_URL}/auth/google/callback`,"_self")
+    const signInWithGoogle = () => {
+        // window.open(`${import.meta.env.VITE_BACKEND_URL}/auth/google/callback`,"_self")
+        window.open(import.meta.env.VITE_BACKEND_URL + ServerVariables.GoogleAuth, "_self")
     }
 
     return (
         <section className="w-full h-screen flex justify-center items-center relative ">
 
             {/* back btn */}
-            <button  onClick={(e)=>navigate(-1)}
-            className="group hover:px-2 transition-all duration-300 ease-in-out
+            <button onClick={(e) => navigate(-1)}
+                className="group hover:px-2 transition-all duration-300 ease-in-out
              absolute top-5 left-5 min-w-10 w-fit h-10 rounded-lg border border-gray-300 dark:border-gray-700 shadow inline-flex justify-center items-center cursor-pointer dark:bg-gray-950">
                 <Icons.ArrowLeft className="h-4 w-4 group-hover:rotate-45 transition-all duration-300 ease-in-out  dark:stroke-white" />
                 <span className="hidden group-hover:block scale-0 group-hover:scale-100 text-sm text-gray-600 dark:text-gray-50 transition-all duration-300 ease-in-out">Back</span>

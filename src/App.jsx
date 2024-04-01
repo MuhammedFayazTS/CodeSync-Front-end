@@ -1,7 +1,7 @@
 import { SignIn } from 'Pages/Auth/SignIn'
 import { SignUp } from 'Pages/Auth/SignUp'
-import EditorLayout from 'Pages/Editor/EditorLayout'
-import Home from 'Pages/Home/Home.jsx'
+import EditorLayout from 'Pages/Main/Editor/EditorLayout'
+import Home from 'Pages/Main/Home/Home.jsx'
 import { Route, Routes } from 'react-router-dom'
 
 

@@ -5,9 +5,9 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import CodeEditor from "../../components/Code-editor/Editor"
+import CodeEditor from "../../../components/Code-editor/Editor"
 import { useEffect, useMemo, useState } from "react"
-import ACTIONS from "../../services/Actions"
+import ACTIONS from "../../../services/ScoketActions"
 import { io } from "socket.io-client"
 
 
