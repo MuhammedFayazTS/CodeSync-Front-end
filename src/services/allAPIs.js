@@ -1,8 +1,15 @@
 import { commonAPI } from "./commonAPI";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL
+const API_VERSION = import.meta.env.VITE_API_VERSION
+const BASE_URL = (import.meta.env.VITE_BACKEND_URL)+API_VERSION
 
-// login api call
-export const signInAPI = async (credentials) => {
-  return await commonAPI("get", `${BASE_URL}/api/user`, "","",credentials);
+// signIn api call
+export const signInLocalAPI = async (userDetails,credentials) => {
+  return await commonAPI("post", `${BASE_URL}/auth/login`,userDetails,"",credentials);
 };
+
+// signIn api call
+export const signInAPI = async (credentials) => {
+  return await commonAPI("get", `${BASE_URL}/me`, "","",credentials);
+};
+
