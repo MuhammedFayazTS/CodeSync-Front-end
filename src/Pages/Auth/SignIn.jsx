@@ -14,6 +14,11 @@ import { Link, useNavigate,  } from "react-router-dom"
 
 export function SignIn() {
     const navigate = useNavigate()
+
+    const signInWithGoogle = () =>{
+        window.open(`${import.meta.env.VITE_BACKEND_URL}/auth/google/callback`,"_self")
+    }
+
     return (
         <section className="w-full h-screen flex justify-center items-center relative ">
 
@@ -38,7 +43,7 @@ export function SignIn() {
                             <Icons.gitHub className="mr-2 h-4 w-4" />
                             Github
                         </Button>
-                        <Button variant="outline">
+                        <Button variant="outline" onClick={signInWithGoogle} >
                             <Icons.google className="mr-2 h-4 w-4" />
                             Google
                         </Button>
