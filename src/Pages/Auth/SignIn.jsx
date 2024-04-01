@@ -36,21 +36,24 @@ export function SignIn() {
         try {
             const credentials = {
                 withCredentials: true
-            }
-
+            };
+    
             if (!userDetails.email || !userDetails.password || userDetails.email === "" || userDetails.password === "") {
-                return alert("Fill all the fields")
+                return alert("Please fill in all the fields.");
             }
-
-            const response = await signInLocalAPI(userDetails, credentials)
-            if (response.data.success) {
-                alert("Sign in successfull")
-                navigate('/')
+    
+            const response = await signInLocalAPI(userDetails, credentials);
+            if (response?.data?.success) {
+                alert("Sign in successful.");
+                navigate('/');
+            } else {
+                alert("Invalid email or password. Please try again.");
             }
         } catch (error) {
-            console.log(error)
+            console.error(error);
+            alert("An error occurred. Please try again later.");
         }
-    }
+    };  
 
 
 
