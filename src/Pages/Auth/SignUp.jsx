@@ -11,9 +11,42 @@ import { Input } from "components/ui/input"
 import { Label } from "components/ui/label"
 import { Button } from "components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
+import { signUpLocalAPI } from "services/allAPIs"
+import { useState } from "react"
 
 export function SignUp() {
+
     const navigate = useNavigate()
+    const [userDetails, setUserDetails] = useState({ username: "", email: "", password: "" })
+
+    // handle change
+    const handleChange = (e) => {
+        setUserDetails({ ...userDetails, [e.target.name]: e.target.value })
+    }
+
+    // sign up with email and password
+    const signUpWithEmailPass = async (e) => {
+        e.preventDefault();
+        try {
+            const credentials = {
+                withCredentials: true
+            }
+
+            if (!userDetails.email || !userDetails.password || !userDetails.username ||
+                userDetails.username === "" || userDetails.email === "" || userDetails.password === "") {
+                return alert("Fill all the fields")
+            }
+
+            const response = await signUpLocalAPI(userDetails)
+            if (response.data.success) {
+                alert("Sign Up successfull")
+                navigate('/sign-in')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <section className="w-full h-screen flex justify-center items-center relative " >
 
@@ -53,16 +86,20 @@ export function SignUp() {
                         </div>
                     </div>
                     <div className="grid gap-2">
+                        <Label htmlFor="username">USER NAME</Label>
+                        <Input id="username" name="username" type="text" placeholder="your name" onChange={handleChange} />
+                    </div>
+                    <div className="grid gap-2">
                         <Label htmlFor="email">Email</Label>
-                        <Input id="email" type="email" placeholder="m@example.com" />
+                        <Input id="email" name="email"  type="email" placeholder="m@example.com" onChange={handleChange} />
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="password">Password</Label>
-                        <Input id="password" type="password" />
+                        <Input id="password" name="password" type="password" onChange={handleChange} />
                     </div>
                 </CardContent>
                 <CardFooter className="flex flex-col space-y-2">
-                    <Button className="w-full">Create account</Button>
+                    <Button className="w-full" onClick={signUpWithEmailPass} >Create account</Button>
                     <CardDescription>
                         already have an account?
                         <Link to={'/sign-in'} className="text-gray-950 dark:text-gray-200 font-semibold ml-1 hover:underline">
