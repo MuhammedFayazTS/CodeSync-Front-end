@@ -1,22 +1,9 @@
-import axios from "axios"
 import HomeButtons from "components/custom/custom-home-buttons"
 import { Icons } from "components/icons"
-import { useEffect } from "react"
-import { signInAPI } from "services/allAPIs"
 
 
 const Home = () => {
 
-  useEffect(()=>{
-    const getUser = async() => {
-      const credentials = {
-        withCredentials:true
-      }
-      const response = await signInAPI(credentials)
-      console.log(response.data)
-    }
-    getUser()
-  },[])
 
   return (
     <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center z-20">
