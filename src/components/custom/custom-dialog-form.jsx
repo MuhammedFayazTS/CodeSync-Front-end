@@ -2,9 +2,13 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { languages } from "content/data";
+import { LANGUAGE_VERSIONS } from "content/constants";
+// import { languages } from "content/data";
 
 const CustomDialogForm = ({ handleChange, roomDetails }) => {
+
+    // languages
+    const languages = Object.entries(LANGUAGE_VERSIONS)
 
     // for select field on change
     const handleSelectChange = (value) => {
@@ -34,9 +38,10 @@ const CustomDialogForm = ({ handleChange, roomDetails }) => {
                         <SelectValue placeholder="Language" />
                     </SelectTrigger>
                     <SelectContent>
-                        {languages.map((language) => (
-                            <SelectItem key={language.name} value={language.name}>
-                                {language.name}
+                        {languages.map(([language,version]) => (
+                            <SelectItem key={language} value={language}>
+                                {language} &nbsp;
+                                <span className="ml-auto text-zinc-700 dark:text-zinc-500">{version}</span>
                             </SelectItem>
                         ))}
                     </SelectContent>
