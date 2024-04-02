@@ -3,11 +3,13 @@ import { v4 as uuidV4 } from "uuid";
 import HomeButton from "components/custom/custom-home-buttons";
 import { Icons } from "components/icons";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 const Home = () => {
-  const initialState = { roomId: "", language: "" }
+  const initialState = { roomId: "", language: "" };
   const [roomDetails, setRoomDetails] = useState(initialState);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     setRoomDetails((prev) => ({ ...prev, roomId: uuidV4() }));
@@ -19,23 +21,26 @@ const Home = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     // Check if any required field is empty
     if (roomDetails.roomId === "" || roomDetails.language === "") {
-      alert("Please fill in all the details");
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: "Please fill in all the details.",
+      });
       return;
     }
     // Proceed with form submission navigate to to code editor page
-    navigate(`/code-editor/${roomDetails.roomId}`,{
-      state:{
-        language: roomDetails.language
-      }
-    })
+    navigate(`/code-editor/${roomDetails.roomId}`, {
+      state: {
+        language: roomDetails.language,
+      },
+    });
 
     // Reset form fields to initial state
     setRoomDetails(initialState);
   };
-
 
   return (
     <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center z-20">

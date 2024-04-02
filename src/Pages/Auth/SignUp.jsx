@@ -1,52 +1,54 @@
-import { Icons } from "@/components/icons.jsx"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "components/ui/card"
-import { Input } from "components/ui/input"
-import { Label } from "components/ui/label"
-import { Button } from "components/ui/button"
-import { Link, useNavigate } from "react-router-dom"
-import { signUpLocalAPI } from "services/allAPIs"
-import { useState } from "react"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Icons } from "@/components/icons.jsx";
+import { Button } from "components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "components/ui/card";
+import { Input } from "components/ui/input";
+import { Label } from "components/ui/label";
+import { signUpLocalAPI } from "services/allAPIs";
+import { useToast } from "@/components/ui/use-toast";
 
 export function SignUp() {
+    const navigate = useNavigate();
+    const { toast } = useToast();
+    const [userDetails, setUserDetails] = useState({ username: "", email: "", password: "" });
 
-    const navigate = useNavigate()
-    const [userDetails, setUserDetails] = useState({ username: "", email: "", password: "" })
-
-    // handle change
     const handleChange = (e) => {
-        setUserDetails({ ...userDetails, [e.target.name]: e.target.value })
-    }
+        setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+    };
 
-    // sign up with email and password
     const signUpWithEmailPass = async (e) => {
         e.preventDefault();
         try {
             if (!userDetails.email || !userDetails.password || !userDetails.username ||
                 userDetails.username === "" || userDetails.email === "" || userDetails.password === "") {
-                return alert("Fill all the fields")
+                return toast({
+                    variant: "destructive",
+                    title: "Validation Error",
+                    description: "Please fill in all the fields.",
+                });
             }
 
-            const response = await signUpLocalAPI(userDetails)
+            const response = await signUpLocalAPI(userDetails);
             if (response.data.success) {
-                alert("Sign Up successfull")
-                navigate('/sign-in')
+                toast({
+                    description: "Sign Up successful.",
+                });
+                navigate('/sign-in');
             }
         } catch (error) {
-            console.log(error)
+            console.error(error);
+            toast({
+                variant: "destructive",
+                description: "An error occurred. Please try again later.",
+            });
         }
-    }
+    };
 
     return (
-        <section className="w-full h-screen flex justify-center items-center relative " >
+        <section className="w-full h-screen flex justify-center items-center relative ">
 
-            <button onClick={(e) => navigate(-1)}
+            <button onClick={() => navigate(-1)}
                 className="group hover:px-2 transition-all duration-300 ease-in-out
              absolute top-5 left-5 min-w-10 w-fit h-10 rounded-lg border border-gray-300 dark:border-gray-700 shadow inline-flex justify-center items-center cursor-pointer dark:bg-gray-950">
                 <Icons.ArrowLeft className="h-4 w-4 group-hover:rotate-45 transition-all duration-300 ease-in-out  dark:stroke-white" />
@@ -55,7 +57,7 @@ export function SignUp() {
 
             <Card className="z-10 min-w-96">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl ">Create an account</CardTitle>
+                    <CardTitle className="text-2xl">Create an account</CardTitle>
                     <CardDescription>
                         Enter your email below to create your account
                     </CardDescription>
@@ -83,11 +85,11 @@ export function SignUp() {
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="username">USER NAME</Label>
-                        <Input id="username" name="username" type="text" placeholder="your name" onChange={handleChange} />
+                        <Input id="username" name="username" type="text" placeholder="Your name" onChange={handleChange} />
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email</Label>
-                        <Input id="email" name="email"  type="email" placeholder="m@example.com" onChange={handleChange} />
+                        <Input id="email" name="email" type="email" placeholder="m@example.com" onChange={handleChange} />
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="password">Password</Label>
@@ -95,9 +97,9 @@ export function SignUp() {
                     </div>
                 </CardContent>
                 <CardFooter className="flex flex-col space-y-2">
-                    <Button className="w-full" onClick={signUpWithEmailPass} >Create account</Button>
+                    <Button className="w-full" onClick={signUpWithEmailPass}>Create account</Button>
                     <CardDescription>
-                        already have an account?
+                        Already have an account?
                         <Link to={'/sign-in'} className="text-gray-950 dark:text-gray-200 font-semibold ml-1 hover:underline">
                             Sign In
                         </Link>
@@ -105,5 +107,5 @@ export function SignUp() {
                 </CardFooter>
             </Card>
         </section>
-    )
+    );
 }

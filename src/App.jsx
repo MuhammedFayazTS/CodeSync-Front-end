@@ -1,9 +1,10 @@
 import { SignIn } from 'Pages/Auth/SignIn';
 import { SignUp } from 'Pages/Auth/SignUp';
-import EditorLayout from 'Pages/Main/Editor/EditorLayout';
 import Home from 'Pages/Main/Home/Home.jsx';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from 'utils/ProtectedRoutes.jsx';
+import { Toaster } from 'components/ui/toaster';
+import { EditorLayout } from 'Pages/Main/Editor/EditorLayout';
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
         <Route path='/code-editor/:id' element={<ProtectedRoute><EditorLayout /></ProtectedRoute>} />
 
       </Routes>
+
+
+      {/* toaster */}
+      <Toaster />
+
     </section>
   );
 }
