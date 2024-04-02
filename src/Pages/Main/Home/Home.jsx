@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import HomeButton from "components/custom/custom-home-buttons";
 import { Icons } from "components/icons";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const initialState = { roomId: "", language: "" }
   const [roomDetails, setRoomDetails] = useState(initialState);
+  const navigate = useNavigate()
 
   useEffect(() => {
     setRoomDetails((prev) => ({ ...prev, roomId: uuidV4() }));
@@ -23,8 +25,13 @@ const Home = () => {
       alert("Please fill in all the details");
       return;
     }
-    // Proceed with form submission
-    console.log(roomDetails);
+    // Proceed with form submission navigate to to code editor page
+    navigate(`/code-editor/${roomDetails.roomId}`,{
+      state:{
+        language: roomDetails.language
+      }
+    })
+
     // Reset form fields to initial state
     setRoomDetails(initialState);
   };
