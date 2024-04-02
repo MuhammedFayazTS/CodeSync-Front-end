@@ -8,6 +8,7 @@ import { Label } from "components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { signInLocalAPI } from "services/allAPIs";
 import { ServerVariables } from "utils/server-variables";
+import BackButton from "components/custom/Back-button/BackButton";
 
 export function SignIn() {
     const navigate = useNavigate();
@@ -59,12 +60,8 @@ export function SignIn() {
 
     return (
         <section className="w-full h-screen flex justify-center items-center relative ">
-            <button onClick={() => navigate(-1)}
-                className="group hover:px-2 transition-all duration-300 ease-in-out
-                absolute top-5 left-5 min-w-10 w-fit h-10 rounded-lg border border-gray-300 dark:border-gray-700 shadow inline-flex justify-center items-center cursor-pointer dark:bg-gray-950">
-                <Icons.ArrowLeft className="h-4 w-4 group-hover:rotate-45 transition-all duration-300 ease-in-out  dark:stroke-white" />
-                <span className="hidden group-hover:block scale-0 group-hover:scale-100 text-sm text-gray-600 dark:text-gray-50 transition-all duration-300 ease-in-out">Back</span>
-            </button>
+
+            <BackButton posX={5} posY={5} />
 
             <Card className="z-10 min-w-96">
                 <CardHeader className="space-y-1">

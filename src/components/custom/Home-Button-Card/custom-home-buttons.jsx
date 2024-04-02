@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { CustomDialog } from "./custom-dialog";
-import CustomDialogForm from "./custom-dialog-form";
+import { CustomDialog } from "../Dialog/custom-dialog";
+import CustomDialogForm from "../Dialog/custom-dialog-form";
 
 const HomeButtons = ({ bgColor, text, icon, desc, roomDetails, handleChange, handleSubmit }) => {
   const [open, setOpen] = useState(false);

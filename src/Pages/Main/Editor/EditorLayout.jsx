@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { v4 as uuidV4 } from "uuid";
-import HomeButton from "components/custom/custom-home-buttons";
+import HomeButton from "components/custom/Home-Button-Card/custom-home-buttons";
 import { Icons } from "components/icons";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import Sidebar from "components/layout/Sidebar";
+import Sidebar from "layout/Sidebar";
 import {
     ResizableHandle,
     ResizablePanel,
