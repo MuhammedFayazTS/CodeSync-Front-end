@@ -4,6 +4,7 @@ import HomeButton from "components/custom/custom-home-buttons";
 import { Icons } from "components/icons";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
+import ThemeSwitch from "components/custom/Theme-switch/ThemeSwitch";
 
 const Home = () => {
   const initialState = { roomId: "", language: "" };
@@ -43,8 +44,14 @@ const Home = () => {
   };
 
   return (
-    <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center z-20">
+    <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center relative z-20">
+
       <h1 className="text-8xl font-bold mb-16 gradient-text">CodeSync</h1>
+
+      <span className="absolute top-5 right-5">
+        <ThemeSwitch />
+      </span>
+
       <div className="z-10 flex gap-x-5">
         <HomeButton
           text="Create New"
@@ -62,6 +69,7 @@ const Home = () => {
           bgColor="purple-gradient"
         />
       </div>
+
     </section>
   );
 };
