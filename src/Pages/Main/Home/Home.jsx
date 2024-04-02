@@ -1,33 +1,57 @@
-import HomeButtons from "components/custom/custom-home-buttons"
-import { Icons } from "components/icons"
-
+import React, { useEffect, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
+import HomeButton from "components/custom/custom-home-buttons";
+import { Icons } from "components/icons";
 
 const Home = () => {
+  const initialState = { roomId: "", language: "" }
+  const [roomDetails, setRoomDetails] = useState(initialState);
+
+  useEffect(() => {
+    setRoomDetails((prev) => ({ ...prev, roomId: uuidV4() }));
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRoomDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    // Check if any required field is empty
+    if (roomDetails.roomId === "" || roomDetails.language === "") {
+      alert("Please fill in all the details");
+      return;
+    }
+    // Proceed with form submission
+    console.log(roomDetails);
+    // Reset form fields to initial state
+    setRoomDetails(initialState);
+  };
 
 
   return (
     <section className="relative h-[100dvh] w-full flex flex-col justify-center items-center z-20">
-
-      <h1 className="text-8xl font-bold mb-16 gradient-text">
-        Code Verse
-      </h1>
-
+      <h1 className="text-8xl font-bold mb-16 gradient-text">CodeSync</h1>
       <div className="z-10 flex gap-x-5">
-        <HomeButtons
-          text={'Create New'}
-          desc={'start a new project'}
-          icon={<Icons.Plus className="h-full w-full group-hover:rotate-45 transition-all duration-300 ease-in-out  dark:stroke-white" />}
-          bgColor={'red-gradient'} />
-        <HomeButtons
-          text={'Create New'}
-          desc={'start a new project'}
-          icon={<Icons.ArrowLeft className="h-full w-full group-hover:rotate-45 transition-all duration-300 ease-in-out  dark:stroke-white" />}
-          bgColor={'purple-gradient'} />
+        <HomeButton
+          text="Create New"
+          desc="Start a new project"
+          icon={<Icons.Plus className="h-full w-full group-hover:rotate-45 transition-all duration-300 ease-in-out dark:stroke-white" />}
+          bgColor="red-gradient"
+          roomDetails={roomDetails}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <HomeButton
+          text="Join Room"
+          desc="Join an existing project"
+          icon={<Icons.ArrowLeft className="h-full w-full group-hover:rotate-45 transition-all duration-300 ease-in-out dark:stroke-white" />}
+          bgColor="purple-gradient"
+        />
       </div>
-
-
     </section>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
