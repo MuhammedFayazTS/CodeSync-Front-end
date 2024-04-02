@@ -21,7 +21,7 @@ const CodeEditor = () => {
             defaultLanguage="javascript"
             language={language}
             defaultValue={CODE_SNIPPETS[language]}
-            theme={theme?editorTheme.dark[0]:editorTheme.light[0]}
+            theme={theme === "dark" ?editorTheme.dark[0]:editorTheme.light[0]}
             onMount={onMount}
         />
     )
