@@ -19,8 +19,8 @@ export function CustomDialog({ dialogTitle,open, setOpen, children, handleSubmit
         </DialogHeader>
         {children}
         <DialogFooter>
-          <Button type="button" onClick={handleClose}>Cancel</Button>
-          <Button type="submit" onClick={handleSaveChanges}>Save changes</Button>
+          <Button type="button" variant={"outline"} onClick={handleClose}>Cancel</Button>
+          <Button type="submit" onClick={handleSaveChanges}>Submit</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
